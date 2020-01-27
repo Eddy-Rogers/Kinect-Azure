@@ -1,0 +1,7 @@
+*collectorcreateonly(components,"tibia_latknee_med_latank_med.txt_sphrs","",14)
+*solidspherefull(-51.690000,43.470000,-178.150000,1.5)
+*solidspherefull(-117.960000,26.240000,-148.780000,1.5)
+*solidspherefull(107.920000,25.200000,187.190000,1.5)
+*solidspherefull(45.240000,4.860000,193.400000,1.5)
+*settopologydisplaytype(2)
+*window(0,0,0,0,0)

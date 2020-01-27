@@ -1,0 +1,6 @@
+*collectorcreateonly(components,"foot_lat_med_toetip.txt_sphrs","",14)
+*solidspherefull(28.910000,-27.040000,84.510000,1.5)
+*solidspherefull(-35.880000,-20.370000,79.990000,1.5)
+*solidspherefull(-1.840000,-11.010000,-73.040000,1.5)
+*settopologydisplaytype(2)
+*window(0,0,0,0,0)

@@ -1,0 +1,18 @@
+﻿BodyTrackingSetup.obj : error LNK2019: unresolved external symbol __imp__k4a_device_open referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol __imp__k4a_device_close referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol __imp__k4a_device_get_capture referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol __imp__k4a_capture_release referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol __imp__k4a_device_start_cameras referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol __imp__k4a_device_stop_cameras referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol __imp__k4a_device_get_calibration referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol _k4abt_tracker_create referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol _k4abt_tracker_destroy referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol _k4abt_tracker_enqueue_capture referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol _k4abt_tracker_pop_result referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol _k4abt_tracker_shutdown referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol _k4abt_frame_release referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol _k4abt_frame_get_num_bodies referenced in function _main
+BodyTrackingSetup.obj : error LNK2019: unresolved external symbol _k4abt_frame_get_body_index_map referenced in function _main
+C:\Program Files\Azure Kinect SDK v1.3.0\sdk\windows-desktop\amd64\release\lib\k4a.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Program Files\Azure Kinect Body Tracking SDK\sdk\windows-desktop\amd64\release\lib\k4abt.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\BodyTracking\Debug\BodyTracking.exe : fatal error LNK1120: 15 unresolved externals

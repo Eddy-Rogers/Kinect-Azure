@@ -1,0 +1,234 @@
+
+[GENERIC_SETTINGS]
+Description = 
+
+[COLLECTION_SETTINGS]
+CollectionTime = 10.000000
+FrameFrequency = 100.000000
+CollectionDelay = 0
+CompositeClock = 0
+
+[MARKERS_SETTINGS]
+NumberOfMarkers = 13
+
+[MARKER_SETTINGS]
+Port1 = 4
+Port2 = 9
+Port3 = 0
+Port4 = 0
+DutyCycle = 40
+MarkerFrequency = 3000.000000
+StroberVoltage = 10.000000
+PopulatedPorts = 2
+[Layout - P0]
+Label = Port 1
+MarkersAvailable = 0
+UseRom = 0
+Cap3020 = 0
+HasROM = 0
+ToolPorts = 0
+VLEDs = 0
+Switches = 0
+Port = 1
+Order = -1
+SubPort = -1
+StroberCount = 1
+[Layout - P0_S0]
+Label = Tool Strober
+MarkersAvailable = 80
+UseRom = 0
+Cap3020 = 0
+HasROM = 0
+ToolPorts = 4
+VLEDs = 0
+Switches = 2
+Port = 1
+Order = 1
+SubPort = 0
+MaxMarkerVoltage = 12
+MarkersToActivate = 0
+Type = 3
+MarkerIndexCount = 0
+SwitchIndexCount = 2
+SwitchIndex0 = 0
+SwitchIndex1 = 1
+ToolCount = 1
+[Layout - P0_S0_T0]
+Label = NDI_8700311_20181219-01
+MarkersAvailable = 20
+UseRom = 0
+Cap3020 = 0
+HasROM = 1
+ToolPorts = 0
+VLEDs = 2
+Switches = 0
+Port = 1
+Order = 1
+SubPort = 1
+MarkerIndexCount = 4
+MarkerIndex0 = 0
+MarkerIndex1 = 1
+MarkerIndex2 = 2
+MarkerIndex3 = 3
+SwitchIndexCount = 0
+[Layout - P1]
+Label = Port 2
+MarkersAvailable = 0
+UseRom = 0
+Cap3020 = 0
+HasROM = 0
+ToolPorts = 0
+VLEDs = 0
+Switches = 0
+Port = 2
+Order = -1
+SubPort = -1
+StroberCount = 1
+[Layout - P1_S0]
+Label = Wireless Strober
+MarkersAvailable = 50
+UseRom = 0
+Cap3020 = 0
+HasROM = 0
+ToolPorts = 0
+VLEDs = 0
+Switches = 0
+Port = 2
+Order = 1
+SubPort = 0
+MaxMarkerVoltage = 15
+MarkersToActivate = 9
+Type = 5
+MarkerIndexCount = 9
+MarkerIndex0 = 4
+MarkerIndex1 = 5
+MarkerIndex2 = 6
+MarkerIndex3 = 7
+MarkerIndex4 = 8
+MarkerIndex5 = 9
+MarkerIndex6 = 10
+MarkerIndex7 = 11
+MarkerIndex8 = 12
+SwitchIndexCount = 0
+ToolCount = 0
+SmartConfig = MMMMMMMMMEEEEE
+StringLabelCount = 1
+StringLabel0 = SPort1
+
+[Mkr_0]
+Label = Marker_1
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 1
+[Mkr_1]
+Label = Marker_2
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 7
+[Mkr_2]
+Label = Marker_3
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 13
+[Mkr_3]
+Label = Marker_4
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 19
+[Mkr_4]
+Label = Marker_5
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 1
+[Mkr_5]
+Label = Marker_6
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 2
+[Mkr_6]
+Label = Marker_7
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 3
+[Mkr_7]
+Label = Marker_8
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 4
+[Mkr_8]
+Label = Marker_9
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 5
+[Mkr_9]
+Label = Marker_10
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 6
+[Mkr_10]
+Label = Marker_11
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 7
+[Mkr_11]
+Label = Marker_12
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 8
+[Mkr_12]
+Label = Marker_13
+FOR_ID = 0
+RB_ID = 0
+FIRING_NODE = 9
+
+[SWITCH_SETTINGS]
+SwitchCount = 2
+[Switch_0]
+Action = 0
+
+[Switch_1]
+Action = 0
+
+
+[RIGID_SETTINGS]
+RBCount = 4
+
+[RigidBody_0]
+ID = 5
+FOR_ID = 0
+StartMarker = 0
+FilePath = NDI_Probe_9_24_19.rig
+Label = NDI_Probe_9_24_19
+[IMARKER_SETTINGS - RB_0]
+NumberOfMarkers = 0
+
+[RigidBody_1]
+ID = 36
+FOR_ID = 0
+StartMarker = 4
+FilePath = kinect_1.rig
+Label = kinect_1
+[IMARKER_SETTINGS - RB_1]
+NumberOfMarkers = 0
+
+[RigidBody_2]
+ID = 37
+FOR_ID = 0
+StartMarker = 7
+FilePath = kinect_2.rig
+Label = kinect_2
+[IMARKER_SETTINGS - RB_2]
+NumberOfMarkers = 0
+
+[RigidBody_3]
+ID = 38
+FOR_ID = 0
+StartMarker = 10
+FilePath = kinect_3.rig
+Label = kinect_3
+[IMARKER_SETTINGS - RB_3]
+NumberOfMarkers = 0
+
+
+[ODAU_SETTINGS]
+ODAUCount = 0

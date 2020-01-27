@@ -1,0 +1,4 @@
+﻿  SyncCameraAbby.cpp
+C:\Users\Abby.Eustace\Downloads\SyncCameraAbby.cpp(291,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'size_t'
+C:\Users\Abby.Eustace\Downloads\SyncCameraAbby.cpp(291,12): message : consider using '%zd' in the format string
+  SyncCameraAbby.vcxproj -> C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\x64\Debug\SyncCameraAbby.exe

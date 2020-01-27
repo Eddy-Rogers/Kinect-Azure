@@ -1,0 +1,6 @@
+*collectorcreateonly(components,"femur_med_lat_troch.txt_sphrs","",14)
+*solidspherefull(-43.180000,-45.110000,-122.940000,1.5)
+*solidspherefull(29.760000,-65.960000,-127.320000,1.5)
+*solidspherefull(63.920000,-169.290000,254.050000,1.5)
+*settopologydisplaytype(2)
+*window(0,0,0,0,0)
