@@ -32,6 +32,9 @@
 #.onnx files
 *.onnx
 
+#.nupkg files
+*.nupkg
+
 # Data files
 *.ply
 *.zip

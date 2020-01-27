@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Users/Abby.Eustace/Desktop/Kinect Azure/Azure-Kinect-Sensor-SDK-develop/examples/green_screen/out/build/x64-Debug/CMakeFiles/green_screen.dir/embed.manifest"
