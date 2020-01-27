@@ -1,0 +1,19 @@
+﻿  main.cpp
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_capture_release referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_capture_get_color_image referenced in function "void __cdecl print_capture_info(struct recording_t *)" (?print_capture_info@@YAXPAUrecording_t@@@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_capture_get_depth_image referenced in function "unsigned __int64 __cdecl first_capture_timestamp(struct _k4a_capture_t *)" (?first_capture_timestamp@@YA_KPAU_k4a_capture_t@@@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_capture_get_ir_image referenced in function "void __cdecl print_capture_info(struct recording_t *)" (?print_capture_info@@YAXPAUrecording_t@@@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_image_create referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_image_get_buffer referenced in function "void __cdecl create_xy_table(struct _k4a_calibration_t const *,struct _k4a_image_t *)" (?create_xy_table@@YAXPBU_k4a_calibration_t@@PAU_k4a_image_t@@@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_image_get_width_pixels referenced in function "void __cdecl generate_point_cloud(struct _k4a_image_t * const,struct _k4a_image_t * const,struct _k4a_image_t *,int *)" (?generate_point_cloud@@YAXQAU_k4a_image_t@@0PAU1@PAH@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_image_get_height_pixels referenced in function "void __cdecl generate_point_cloud(struct _k4a_image_t * const,struct _k4a_image_t * const,struct _k4a_image_t *,int *)" (?generate_point_cloud@@YAXQAU_k4a_image_t@@0PAU1@PAH@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_image_get_device_timestamp_usec referenced in function "unsigned __int64 __cdecl first_capture_timestamp(struct _k4a_capture_t *)" (?first_capture_timestamp@@YA_KPAU_k4a_capture_t@@@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_image_release referenced in function "unsigned __int64 __cdecl first_capture_timestamp(struct _k4a_capture_t *)" (?first_capture_timestamp@@YA_KPAU_k4a_capture_t@@@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_calibration_2d_to_3d referenced in function "void __cdecl create_xy_table(struct _k4a_calibration_t const *,struct _k4a_image_t *)" (?create_xy_table@@YAXPBU_k4a_calibration_t@@PAU_k4a_image_t@@@Z)
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_playback_open referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_playback_get_calibration referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_playback_get_record_configuration referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_playback_get_next_capture referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__k4a_playback_close referenced in function _main
+C:\Program Files\Azure Kinect SDK v1.3.0\sdk\windows-desktop\amd64\release\lib\k4a.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\Debug\Cob Kinect Azure.exe : fatal error LNK1120: 16 unresolved externals

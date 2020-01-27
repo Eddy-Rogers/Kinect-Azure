@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\main.cpp(356,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'size_t'
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\main.cpp(356,11): message : consider using '%zd' in the format string
+  Cob Kinect Azure.vcxproj -> C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\x64\Debug\Cob Kinect Azure.exe
