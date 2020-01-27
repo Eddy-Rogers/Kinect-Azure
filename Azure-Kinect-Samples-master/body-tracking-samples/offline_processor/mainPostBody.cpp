@@ -341,8 +341,6 @@ bool predict_joints(json& frames_json, int frame_count, k4abt_tracker_t tracker,
 			body_result_json["joint_confidence"].push_back({ skeleton.joints[j].confidence_level });
 		}
 
-		
-
 		body_result_json["total_confidence"] = total_confidence;
 
 		frame_result_json["bodies"].push_back(body_result_json);
