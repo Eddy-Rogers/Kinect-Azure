@@ -344,7 +344,6 @@ bool predict_joints(json& frames_json, int frame_count, k4abt_tracker_t tracker,
 		
 
 		body_result_json["total_confidence"] = total_confidence;
-		body_result_json["Body Orientation"] = skeleton.joints[18].orientation
 
 		frame_result_json["bodies"].push_back(body_result_json);
 	}
