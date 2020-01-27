@@ -1,0 +1,2 @@
+﻿  mainPostBody.cpp
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(15,10): fatal error C1083: Cannot open include file: 'k4a/k4a.h': No such file or directory
