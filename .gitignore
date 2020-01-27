@@ -35,6 +35,9 @@
 #.nupkg files
 *.nupkg
 
+#*.ipch files
+*.ipch
+
 # Data files
 *.ply
 *.zip
