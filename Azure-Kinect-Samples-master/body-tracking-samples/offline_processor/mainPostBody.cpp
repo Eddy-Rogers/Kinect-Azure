@@ -164,10 +164,10 @@ static void generate_point_cloud(const k4a_image_t depth_image, const k4a_image_
 	for (int i = 0; i < width * height; i++)
 	{
 		//DU Modification: Check if the point is within the acceptable range of points close to a joint
-		if (depth_data[i] != 0 && !isnan(xy_table_data[i].xy.x) && !isnan(xy_table_data[i].xy.y)
-			&& within_bounds(xy_table_data[i].xy.x * (float)depth_data[i],
-								xy_table_data[i].xy.y * (float)depth_data[i], (float)depth_data[i], bounds)
-			&& (ir_data[i] != 0 && ir_data[i] <= 400))
+		if (depth_data[i] != 0 && !isnan(xy_table_data[i].xy.x) && !isnan(xy_table_data[i].xy.y))
+			//&& within_bounds(xy_table_data[i].xy.x * (float)depth_data[i],
+								//xy_table_data[i].xy.y * (float)depth_data[i], (float)depth_data[i], bounds)
+			//&& (ir_data[i] != 0 && ir_data[i] <= 400))
 		{
 			point_cloud_data[i].xyz.x = xy_table_data[i].xy.x * (float)depth_data[i];
 			point_cloud_data[i].xyz.y = xy_table_data[i].xy.y * (float)depth_data[i];
