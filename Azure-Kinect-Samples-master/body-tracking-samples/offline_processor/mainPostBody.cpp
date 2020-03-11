@@ -101,7 +101,8 @@ bounding_box create_bounding_box(k4a_float3_t* jointPositions)
 	bounding_box bounds;
 	bounds.maximum = jointPositions[0];
 	bounds.minimum = jointPositions[0];
-	for (int i = 0; i < 31; i++)
+
+	for (int i = 0; i < 32; i++)
 	{
 		k4a_float3_t currentPoint = jointPositions[i];
 		if (currentPoint.xyz.x >= bounds.maximum.xyz.x)
@@ -116,21 +117,21 @@ bounding_box create_bounding_box(k4a_float3_t* jointPositions)
 		{
 			bounds.maximum.xyz.z = currentPoint.xyz.z;
 		}
-		if (currentPoint.xyz.x <= bounds.maximum.xyz.x)
+		if (currentPoint.xyz.x < bounds.minimum.xyz.x)
 		{
 			bounds.minimum.xyz.x = currentPoint.xyz.x;
 		}
-		if (currentPoint.xyz.y <= bounds.maximum.xyz.y)
+		if (currentPoint.xyz.y < bounds.minimum.xyz.y)
 		{
 			bounds.minimum.xyz.y = currentPoint.xyz.y;
 		}
-		if (currentPoint.xyz.z <= bounds.maximum.xyz.z)
+		if (currentPoint.xyz.z < bounds.minimum.xyz.z)
 		{
 			bounds.minimum.xyz.z = currentPoint.xyz.z;
 		}
 	}
-	bounds.maximum.xyz.x += 1000; bounds.maximum.xyz.y += 1000; bounds.maximum.xyz.z += 1000;
-	bounds.minimum.xyz.x -= 1000; bounds.minimum.xyz.y -= 1000; bounds.minimum.xyz.z -= 1000;
+	bounds.maximum.xyz.x += 100; bounds.maximum.xyz.y += 100; bounds.maximum.xyz.z += 100;
+	bounds.minimum.xyz.x -= 100; bounds.minimum.xyz.y -= 100; bounds.minimum.xyz.z -= 100;
 	return bounds;
 }
 
@@ -148,7 +149,8 @@ static void generate_point_cloud(const k4a_image_t depth_image, const k4a_image_
 	const k4a_image_t xy_table,
 	k4a_image_t point_cloud,
 	int* point_count,
-	k4a_float3_t* jointPositions)
+	k4a_float3_t* jointPositions,
+	bool bounding)
 {
 	int width = k4a_image_get_width_pixels(depth_image);
 	int height = k4a_image_get_height_pixels(depth_image);
@@ -165,14 +167,25 @@ static void generate_point_cloud(const k4a_image_t depth_image, const k4a_image_
 	{
 		//DU Modification: Check if the point is within the acceptable range of points close to a joint
 		if (depth_data[i] != 0 && !isnan(xy_table_data[i].xy.x) && !isnan(xy_table_data[i].xy.y))
-			//&& within_bounds(xy_table_data[i].xy.x * (float)depth_data[i],
-								//xy_table_data[i].xy.y * (float)depth_data[i], (float)depth_data[i], bounds)
 			//&& (ir_data[i] != 0 && ir_data[i] <= 400))
 		{
-			point_cloud_data[i].xyz.x = xy_table_data[i].xy.x * (float)depth_data[i];
-			point_cloud_data[i].xyz.y = xy_table_data[i].xy.y * (float)depth_data[i];
-			point_cloud_data[i].xyz.z = (float)depth_data[i];
-			(*point_count)++;
+			if (bounding) {
+				//std::cout << "Bounding...\n";
+				// * (float)depth_data[i]
+				if (within_bounds(xy_table_data[i].xy.x * (float)depth_data[i], xy_table_data[i].xy.y * (float)depth_data[i], (float)depth_data[i], bounds)) {
+					point_cloud_data[i].xyz.x = xy_table_data[i].xy.x * (float)depth_data[i];
+					point_cloud_data[i].xyz.y = xy_table_data[i].xy.y * (float)depth_data[i];
+					point_cloud_data[i].xyz.z = (float)depth_data[i];
+					(*point_count)++;
+					//std::cout << "Point Written...\n";
+				}
+			}
+			else {
+				point_cloud_data[i].xyz.x = xy_table_data[i].xy.x * (float)depth_data[i];
+				point_cloud_data[i].xyz.y = xy_table_data[i].xy.y * (float)depth_data[i];
+				point_cloud_data[i].xyz.z = (float)depth_data[i];
+				(*point_count)++;
+			}
 		}
 		else
 		{
@@ -246,6 +259,37 @@ int get_state_user_input()
 	if (userInput.compare("json") == 0) return 0;
 	if (userInput.compare("point") == 0) return 1;
 	if (userInput.compare("both") == 0) return 2;
+
+	//If incorrectly formatted, just try again
+	else {
+		std::cout << "Input formatted incorrectly. Please try again\n";
+		return get_state_user_input();
+	}
+}
+
+//DU Modification -- Eddy Rogers
+//Retrieve input from the user, and return a bool representing whether the user wants to use a bounding box.
+bool get_bounding_input()
+{
+	std::string userInput;
+
+	//Output instructions to the user
+	std::cout << "Please specify whether or not you want the program to use joint locations to filter out background points.\n";
+	std::cout << "To do this, type \"Y\" or \"N\" (non case sensitive)\n";
+
+	//Get user input
+	std::cin >> userInput;
+
+	//Transform the input into lowercase
+	int length = std::string(userInput).size();
+	for (int i = 0; i < length; i++)
+	{
+		userInput[i] = std::tolower(userInput[i]);
+	}
+
+	//Compare the input string
+	if (userInput.compare("y") == 0) return true;
+	if (userInput.compare("n") == 0) return false;
 
 	//If incorrectly formatted, just try again
 	else {
@@ -368,7 +412,7 @@ bool check_depth_image_exists(k4a_capture_t capture)
 //DU Modification -- Eddy Rogers
 //Modified the function arguments to take a list of recordings, calibrations, the length of the master recording, and how many files to process
 //Modified the function to run through each recording provided and produce a JSON object for each of them
-bool process_mkv_offline_json(playback_info playback) {
+bool process_mkv_offline_json(playback_info playback, bool bounding) {
 	
 	//Array of booleans to hold whether or not each file was processed
 	bool* success = new bool[playback.file_count];
@@ -378,7 +422,7 @@ bool process_mkv_offline_json(playback_info playback) {
 	}
 
 	//For each given file
-	for (int i = 0; i < playback.file_count; i++)
+	for (int i = 2; i < 3; i++)
 	{
 		//Open the recording
 		k4a_playback_t playback_handle = nullptr;
@@ -523,7 +567,7 @@ bool process_mkv_offline_json(playback_info playback) {
 //DU Modification -- Eddy Rogers
 //Modified the function arguments to take a list of recordings, calibrations, the length of the master recording, and how many files to process
 //Modified the program to process one frame from each camera and apply bounds to the found body or bodies
-bool process_mkv_offline_point(playback_info playback)
+bool process_mkv_offline_point(playback_info playback, bool bounding)
 {
 	//Array of booleans to hold whether or not each file was processed
 	bool* success = new bool[playback.file_count];
@@ -640,7 +684,7 @@ bool process_mkv_offline_point(playback_info playback)
 					//Generate the point cloud
 					int point_count = 0;
 
-					generate_point_cloud(depthImage, irImage, xy_table, point_cloud, &point_count, joints);
+					generate_point_cloud(depthImage, irImage, xy_table, point_cloud, &point_count, joints, bounding);
 
 					//Save it to a file
 
@@ -685,7 +729,7 @@ bool process_mkv_offline_point(playback_info playback)
 //DU Modification -- Eddy Rogers
 //Modified the function arguments to take a list of recordings, calibrations, the length of the master recording, and how many files to process
 //Modified the program to process one frame from each camera and apply bounds to the found body or bodies
-bool process_mkv_offline_both(playback_info playback)
+bool process_mkv_offline_both(playback_info playback, bool bounding)
 {
 	//Array of booleans to hold whether or not each file was processed
 	bool* success = new bool[playback.file_count];
@@ -695,7 +739,7 @@ bool process_mkv_offline_both(playback_info playback)
 	}
 
 	//For each input file
-	for (int i = 0; i < playback.file_count; i++)
+	for (int i = 2; i < playback.file_count - 1; i++)
 	{
 		//Open the file
 		k4a_playback_t playback_handle = nullptr;
@@ -802,7 +846,9 @@ bool process_mkv_offline_both(playback_info playback)
 					//Generate the point cloud
 					int point_count = 0;
 
-					generate_point_cloud(depthImage, irImage, xy_table, point_cloud, &point_count, joints);
+					
+
+					generate_point_cloud(depthImage, irImage, xy_table, point_cloud, &point_count, joints, bounding);
 
 					std::ostringstream outputFileName;
 
@@ -990,14 +1036,15 @@ int main(int argc, char** argv)
 	if (get_playback_info(argc, argv, &playback, master_sub))
 	{
 		int state = get_state_user_input();
+		bool bounding = get_bounding_input();
 		if (state == 0) {
-			return process_mkv_offline_json(playback) ? 0 : -1;
+			return process_mkv_offline_json(playback, bounding) ? 0 : -1;
 		}
 		else if (state == 1) {
-			return process_mkv_offline_point(playback) ? 0 : -1;
+			return process_mkv_offline_point(playback, bounding) ? 0 : -1;
 		}
 		else {
-			return process_mkv_offline_both(playback) ? 0 : -1;
+			return process_mkv_offline_both(playback, bounding) ? 0 : -1;
 		}
 	}
 }

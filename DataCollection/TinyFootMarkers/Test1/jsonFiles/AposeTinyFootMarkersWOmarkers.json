@@ -1,0 +1,520 @@
+{
+    "bone_list": [
+        [
+            "SPINE_CHEST",
+            "SPINE_NAVEL"
+        ],
+        [
+            "SPINE_NAVEL",
+            "PELVIS"
+        ],
+        [
+            "SPINE_CHEST",
+            "NECK"
+        ],
+        [
+            "NECK",
+            "HEAD"
+        ],
+        [
+            "HEAD",
+            "NOSE"
+        ],
+        [
+            "SPINE_CHEST",
+            "CLAVICLE_LEFT"
+        ],
+        [
+            "CLAVICLE_LEFT",
+            "SHOULDER_LEFT"
+        ],
+        [
+            "SHOULDER_LEFT",
+            "ELBOW_LEFT"
+        ],
+        [
+            "ELBOW_LEFT",
+            "WRIST_LEFT"
+        ],
+        [
+            "WRIST_LEFT",
+            "HAND_LEFT"
+        ],
+        [
+            "HAND_LEFT",
+            "HANDTIP_LEFT"
+        ],
+        [
+            "WRIST_LEFT",
+            "THUMB_LEFT"
+        ],
+        [
+            "PELVIS",
+            "HIP_LEFT"
+        ],
+        [
+            "HIP_LEFT",
+            "KNEE_LEFT"
+        ],
+        [
+            "KNEE_LEFT",
+            "ANKLE_LEFT"
+        ],
+        [
+            "ANKLE_LEFT",
+            "FOOT_LEFT"
+        ],
+        [
+            "NOSE",
+            "EYE_LEFT"
+        ],
+        [
+            "EYE_LEFT",
+            "EAR_LEFT"
+        ],
+        [
+            "SPINE_CHEST",
+            "CLAVICLE_RIGHT"
+        ],
+        [
+            "CLAVICLE_RIGHT",
+            "SHOULDER_RIGHT"
+        ],
+        [
+            "SHOULDER_RIGHT",
+            "ELBOW_RIGHT"
+        ],
+        [
+            "ELBOW_RIGHT",
+            "WRIST_RIGHT"
+        ],
+        [
+            "WRIST_RIGHT",
+            "HAND_RIGHT"
+        ],
+        [
+            "HAND_RIGHT",
+            "HANDTIP_RIGHT"
+        ],
+        [
+            "WRIST_RIGHT",
+            "THUMB_RIGHT"
+        ],
+        [
+            "PELVIS",
+            "HIP_RIGHT"
+        ],
+        [
+            "HIP_RIGHT",
+            "KNEE_RIGHT"
+        ],
+        [
+            "KNEE_RIGHT",
+            "ANKLE_RIGHT"
+        ],
+        [
+            "ANKLE_RIGHT",
+            "FOOT_RIGHT"
+        ],
+        [
+            "NOSE",
+            "EYE_RIGHT"
+        ],
+        [
+            "EYE_RIGHT",
+            "EAR_RIGHT"
+        ]
+    ],
+    "frames": [
+        {
+            "bodies": [],
+            "frame_id": 0,
+            "num_bodies": 0,
+            "timestamp_usec": 49422
+        },
+        {
+            "bodies": [],
+            "frame_id": 1,
+            "num_bodies": 0,
+            "timestamp_usec": 82755
+        },
+        {
+            "bodies": [],
+            "frame_id": 2,
+            "num_bodies": 0,
+            "timestamp_usec": 116088
+        },
+        {
+            "bodies": [],
+            "frame_id": 3,
+            "num_bodies": 0,
+            "timestamp_usec": 149422
+        },
+        {
+            "bodies": [],
+            "frame_id": 4,
+            "num_bodies": 0,
+            "timestamp_usec": 182755
+        },
+        {
+            "bodies": [],
+            "frame_id": 5,
+            "num_bodies": 0,
+            "timestamp_usec": 216077
+        },
+        {
+            "bodies": [],
+            "frame_id": 6,
+            "num_bodies": 0,
+            "timestamp_usec": 249422
+        },
+        {
+            "bodies": [],
+            "frame_id": 7,
+            "num_bodies": 0,
+            "timestamp_usec": 282755
+        },
+        {
+            "bodies": [],
+            "frame_id": 8,
+            "num_bodies": 0,
+            "timestamp_usec": 316088
+        },
+        {
+            "bodies": [],
+            "frame_id": 9,
+            "num_bodies": 0,
+            "timestamp_usec": 349411
+        },
+        {
+            "bodies": [],
+            "frame_id": 10,
+            "num_bodies": 0,
+            "timestamp_usec": 382755
+        },
+        {
+            "bodies": [],
+            "frame_id": 11,
+            "num_bodies": 0,
+            "timestamp_usec": 416088
+        },
+        {
+            "bodies": [],
+            "frame_id": 12,
+            "num_bodies": 0,
+            "timestamp_usec": 449422
+        },
+        {
+            "bodies": [],
+            "frame_id": 13,
+            "num_bodies": 0,
+            "timestamp_usec": 482744
+        },
+        {
+            "bodies": [],
+            "frame_id": 14,
+            "num_bodies": 0,
+            "timestamp_usec": 516088
+        },
+        {
+            "bodies": [],
+            "frame_id": 15,
+            "num_bodies": 0,
+            "timestamp_usec": 549422
+        },
+        {
+            "bodies": [],
+            "frame_id": 16,
+            "num_bodies": 0,
+            "timestamp_usec": 582755
+        },
+        {
+            "bodies": [],
+            "frame_id": 17,
+            "num_bodies": 0,
+            "timestamp_usec": 616088
+        },
+        {
+            "bodies": [],
+            "frame_id": 18,
+            "num_bodies": 0,
+            "timestamp_usec": 649411
+        },
+        {
+            "bodies": [],
+            "frame_id": 19,
+            "num_bodies": 0,
+            "timestamp_usec": 682755
+        },
+        {
+            "bodies": [],
+            "frame_id": 20,
+            "num_bodies": 0,
+            "timestamp_usec": 716088
+        },
+        {
+            "bodies": [],
+            "frame_id": 21,
+            "num_bodies": 0,
+            "timestamp_usec": 749411
+        },
+        {
+            "bodies": [],
+            "frame_id": 22,
+            "num_bodies": 0,
+            "timestamp_usec": 782755
+        },
+        {
+            "bodies": [],
+            "frame_id": 23,
+            "num_bodies": 0,
+            "timestamp_usec": 816088
+        },
+        {
+            "bodies": [],
+            "frame_id": 24,
+            "num_bodies": 0,
+            "timestamp_usec": 849411
+        },
+        {
+            "bodies": [],
+            "frame_id": 25,
+            "num_bodies": 0,
+            "timestamp_usec": 882744
+        },
+        {
+            "bodies": [],
+            "frame_id": 26,
+            "num_bodies": 0,
+            "timestamp_usec": 916088
+        },
+        {
+            "bodies": [],
+            "frame_id": 27,
+            "num_bodies": 0,
+            "timestamp_usec": 949422
+        },
+        {
+            "bodies": [],
+            "frame_id": 28,
+            "num_bodies": 0,
+            "timestamp_usec": 982744
+        },
+        {
+            "bodies": [],
+            "frame_id": 29,
+            "num_bodies": 0,
+            "timestamp_usec": 1016077
+        },
+        {
+            "bodies": [],
+            "frame_id": 30,
+            "num_bodies": 0,
+            "timestamp_usec": 1049422
+        },
+        {
+            "bodies": [],
+            "frame_id": 31,
+            "num_bodies": 0,
+            "timestamp_usec": 1082755
+        },
+        {
+            "bodies": [],
+            "frame_id": 32,
+            "num_bodies": 0,
+            "timestamp_usec": 1116077
+        },
+        {
+            "bodies": [],
+            "frame_id": 33,
+            "num_bodies": 0,
+            "timestamp_usec": 1149422
+        },
+        {
+            "bodies": [],
+            "frame_id": 34,
+            "num_bodies": 0,
+            "timestamp_usec": 1182744
+        },
+        {
+            "bodies": [],
+            "frame_id": 35,
+            "num_bodies": 0,
+            "timestamp_usec": 1216088
+        },
+        {
+            "bodies": [],
+            "frame_id": 36,
+            "num_bodies": 0,
+            "timestamp_usec": 1249422
+        },
+        {
+            "bodies": [],
+            "frame_id": 37,
+            "num_bodies": 0,
+            "timestamp_usec": 1282755
+        },
+        {
+            "bodies": [],
+            "frame_id": 38,
+            "num_bodies": 0,
+            "timestamp_usec": 1316088
+        },
+        {
+            "bodies": [],
+            "frame_id": 39,
+            "num_bodies": 0,
+            "timestamp_usec": 1349422
+        },
+        {
+            "bodies": [],
+            "frame_id": 40,
+            "num_bodies": 0,
+            "timestamp_usec": 1382744
+        },
+        {
+            "bodies": [],
+            "frame_id": 41,
+            "num_bodies": 0,
+            "timestamp_usec": 1416088
+        },
+        {
+            "bodies": [],
+            "frame_id": 42,
+            "num_bodies": 0,
+            "timestamp_usec": 1449422
+        },
+        {
+            "bodies": [],
+            "frame_id": 43,
+            "num_bodies": 0,
+            "timestamp_usec": 1482744
+        },
+        {
+            "bodies": [],
+            "frame_id": 44,
+            "num_bodies": 0,
+            "timestamp_usec": 1516088
+        },
+        {
+            "bodies": [],
+            "frame_id": 45,
+            "num_bodies": 0,
+            "timestamp_usec": 1549422
+        },
+        {
+            "bodies": [],
+            "frame_id": 46,
+            "num_bodies": 0,
+            "timestamp_usec": 1582744
+        },
+        {
+            "bodies": [],
+            "frame_id": 47,
+            "num_bodies": 0,
+            "timestamp_usec": 1616088
+        },
+        {
+            "bodies": [],
+            "frame_id": 48,
+            "num_bodies": 0,
+            "timestamp_usec": 1649411
+        },
+        {
+            "bodies": [],
+            "frame_id": 49,
+            "num_bodies": 0,
+            "timestamp_usec": 1682755
+        },
+        {
+            "bodies": [],
+            "frame_id": 50,
+            "num_bodies": 0,
+            "timestamp_usec": 1716077
+        },
+        {
+            "bodies": [],
+            "frame_id": 51,
+            "num_bodies": 0,
+            "timestamp_usec": 1749422
+        },
+        {
+            "bodies": [],
+            "frame_id": 52,
+            "num_bodies": 0,
+            "timestamp_usec": 1782744
+        },
+        {
+            "bodies": [],
+            "frame_id": 53,
+            "num_bodies": 0,
+            "timestamp_usec": 1816088
+        },
+        {
+            "bodies": [],
+            "frame_id": 54,
+            "num_bodies": 0,
+            "timestamp_usec": 1849422
+        },
+        {
+            "bodies": [],
+            "frame_id": 55,
+            "num_bodies": 0,
+            "timestamp_usec": 1882755
+        },
+        {
+            "bodies": [],
+            "frame_id": 56,
+            "num_bodies": 0,
+            "timestamp_usec": 1916088
+        },
+        {
+            "bodies": [],
+            "frame_id": 57,
+            "num_bodies": 0,
+            "timestamp_usec": 1949422
+        },
+        {
+            "bodies": [],
+            "frame_id": 58,
+            "num_bodies": 0,
+            "timestamp_usec": 1982744
+        }
+    ],
+    "joint_names": [
+        "PELVIS",
+        "SPINE_NAVEL",
+        "SPINE_CHEST",
+        "NECK",
+        "CLAVICLE_LEFT",
+        "SHOULDER_LEFT",
+        "ELBOW_LEFT",
+        "WRIST_LEFT",
+        "HAND_LEFT",
+        "HANDTIP_LEFT",
+        "THUMB_LEFT",
+        "CLAVICLE_RIGHT",
+        "SHOULDER_RIGHT",
+        "ELBOW_RIGHT",
+        "WRIST_RIGHT",
+        "HAND_RIGHT",
+        "HANDTIP_RIGHT",
+        "THUMB_RIGHT",
+        "HIP_LEFT",
+        "KNEE_LEFT",
+        "ANKLE_LEFT",
+        "FOOT_LEFT",
+        "HIP_RIGHT",
+        "KNEE_RIGHT",
+        "ANKLE_RIGHT",
+        "FOOT_RIGHT",
+        "HEAD",
+        "NOSE",
+        "EYE_LEFT",
+        "EAR_LEFT",
+        "EYE_RIGHT",
+        "EAR_RIGHT"
+    ],
+    "k4abt_sdk_version": "0.9.5",
+    "source_file": "AposeTinyFootMarkersWOmarkers.mkv"
+}

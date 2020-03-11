@@ -1,4 +1,4 @@
-ptCloud=pcread(['C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\x64\Debug\Marker Testing\t_pose_modified.ply']); % The square bracket park is the filepath to the .ply file
+ptCloud=pcread(['C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\x64\Debug\Sub00Feb17Sub2Trial02.170.ply']); % The square bracket park is the filepath to the .ply file
     figure
     c=pcshow(ptCloud);
 %     set(c,'colormap',gray)

@@ -1,8 +1,8 @@
 clc; clear all ;close all
-MasterPointFilePath=dir('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DataJan_23\Lunge\PlyFiles\LungeMaster\*.ply');
-Sub1PointFilePath=dir('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DataJan_23\Lunge\PlyFiles\LungeSub1\*.ply');
-Sub2PointFilePath=dir('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DataJan_23\Lunge\PlyFiles\LungeSub2\*.ply');
-Sub3PointFilePath=dir('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DataJan_23\Lunge\PlyFiles\LungeSub3\*.ply');
+MasterPointFilePath=dir('R:\Research Common\HDL\Personal Folders\Eustace\KinectViconValidation\SetupTestData\Test2(Feb17)\PlyFiles\Master\*.ply');
+Sub1PointFilePath=dir('R:\Research Common\HDL\Personal Folders\Eustace\KinectViconValidation\SetupTestData\Test2(Feb17)\PlyFiles\Sub1\*.ply');
+Sub2PointFilePath=dir('R:\Research Common\HDL\Personal Folders\Eustace\KinectViconValidation\SetupTestData\Test2(Feb17)\PlyFiles\Sub2\*.ply');
+Sub3PointFilePath=dir('R:\Research Common\HDL\Personal Folders\Eustace\KinectViconValidation\SetupTestData\Test2(Feb17)\PlyFiles\Sub3\*.ply');
 
 MasterFileLength=length(MasterPointFilePath);
 Sub1FileLength=length(Sub1PointFilePath);
@@ -16,34 +16,34 @@ WFOV_NFOVTrans=[1 0 0 0;
     0 sin(angle) cos(angle)  0;
     0 0 0 1];
 
-TransSub1Master=[-0.013138500042, 0.102875813842, -0.994607448578, 2058.038085937500;
--0.118878543377, 0.987477779388, 0.103708721697, -267.594909667969;
-0.992821872234, 0.119600065053, -0.000744250254, 2821.655761718750;
-0.000000000000, 0.000000000000, 0.000000000000, 1.000000000000];
+TransSub1Master=[0.003262548940 0.158023983240 -0.987429857254 2240.754882812500
+-0.134737223387 0.978500425816 0.156149774790 -326.543151855469
+0.990876019001 0.132534116507 0.024484118447 2489.085449218750
+0.000000000000 0.000000000000 0.000000000000 1.000000000000];
 
-TransSub2Master=[-0.999450623989, -0.021691957489, -0.025058247149, 323.066650390625;
--0.026698064059, 0.974932432175, 0.220893502235, -554.754211425781;
-0.019638486207, 0.221441164613, -0.974975943565, 5330.625000000000;
-0.000000000000, 0.000000000000, 0.000000000000, 1.000000000000];
+TransSub2Master=[ -0.999287605286 0.018243510276 -0.033037651330 117.151992797852
+0.009763699956 0.970568001270 0.240629211068 -600.226440429688
+0.036455206573 0.240135207772 -0.970054686069 5110.304199218750
+0.000000000000 0.000000000000 0.000000000000 1.000000000000];
 
-TransSub3Master=[-0.053180895746, -0.142738580704, 0.988330662251, -1668.352050781250;
-0.085751965642, 0.985422432423, 0.146932780743, -310.523437500000;
--0.994896173477, 0.092565312982, -0.040165532380, 2554.448486328125;
-0.000000000000, 0.000000000000, 0.000000000000, 1.000000000000];
+TransSub3Master=[0.007361589931 -0.138939142227 0.990273535252 -2110.854736328125
+0.119770132005 0.983294010162 0.137069523335 -259.883605957031
+-0.992774367332 0.117596141994 0.023879365996 2609.124267578125
+0.000000000000 0.000000000000 0.000000000000 1.000000000000];
 
 k=1;
 
-for countFile=100%1:LeastFiles
+for countFile=1:5%1:LeastFiles
     
-if exist([MasterPointFilePath(1).folder,'\',sprintf('LungeNFOVMaster.%d.ply',countFile)])==2 && ...  
-exist([Sub1PointFilePath(1).folder,'\',sprintf('LungeNFOVSub1.%d.ply',countFile)])==2 && ...  
-exist([Sub2PointFilePath(1).folder,'\',sprintf('LungeNFOVSub2.%d.ply',countFile)])==2 && ...  
-exist([Sub3PointFilePath(1).folder,'\',sprintf('LungeNFOVSub3.%d.ply',countFile)])==2
+if exist([MasterPointFilePath(1).folder,'\',sprintf('Sub00Feb17MasterTrial02.%d.ply',countFile)])==2 && ...  
+exist([Sub1PointFilePath(1).folder,'\',sprintf('Sub00Feb17Sub1Trial02.%d.ply',countFile)])==2 && ...  
+exist([Sub2PointFilePath(1).folder,'\',sprintf('Sub00Feb17Sub2Trial02.%d.ply',countFile)])==2 && ...  
+exist([Sub3PointFilePath(1).folder,'\',sprintf('Sub00Feb17Sub3Trial02.%d.ply',countFile)])==2
     
-MasterPointFile=[MasterPointFilePath(1).folder,'\',sprintf('LungeNFOVMaster.%d.ply',countFile)];  
-Sub1PointFile=[Sub1PointFilePath(1).folder,'\',sprintf('LungeNFOVSub1.%d.ply',countFile)];  
-Sub2PointFile=[Sub2PointFilePath(1).folder,'\',sprintf('LungeNFOVSub2.%d.ply',countFile)];  
-Sub3PointFile=[Sub3PointFilePath(1).folder,'\',sprintf('LungeNFOVSub3.%d.ply',countFile)];  
+MasterPointFile=[MasterPointFilePath(1).folder,'\',sprintf('Sub00Feb17MasterTrial02.%d.ply',countFile)];  
+Sub1PointFile=[Sub1PointFilePath(1).folder,'\',sprintf('Sub00Feb17Sub1Trial02.%d.ply',countFile)];  
+Sub2PointFile=[Sub2PointFilePath(1).folder,'\',sprintf('Sub00Feb17Sub2Trial02.%d.ply',countFile)];  
+Sub3PointFile=[Sub3PointFilePath(1).folder,'\',sprintf('Sub00Feb17Sub3Trial02.%d.ply',countFile)];  
 
 
 MasterPtCloud=pcread(MasterPointFile);
@@ -73,7 +73,7 @@ MasterPtCloud=pcread(MasterPointFile);
    end
     
    for s1=1:LengthSub1
-       Sub1PtCloudTrans(s1,:)=TransSub1Master*WFOV_NFOVTrans*Sub1PtCloudTemp(s1,:)';
+       Sub1PtCloudTrans(s1,:)=TransSub1Master*Sub1PtCloudTemp(s1,:)';
    end
     
    for s2=1:LengthSub2
@@ -81,46 +81,49 @@ MasterPtCloud=pcread(MasterPointFile);
    end
    
    for s3=1:LengthSub3
-       Sub3PtCloudTrans(s3,:)=TransSub3Master*WFOV_NFOVTrans*Sub3PtCloudTemp(s3,:)';
+       Sub3PtCloudTrans(s3,:)=TransSub3Master*Sub3PtCloudTemp(s3,:)';
    end
       MasterPtCloudFinal=pointCloud(MasterPtCloudTrans(:,1:3));
    Sub1PtCloudFinal=pointCloud(Sub1PtCloudTrans(:,1:3));
     Sub2PtCloudFinal=pointCloud(Sub2PtCloudTrans(:,1:3));
      Sub3PtCloudFinal=pointCloud(Sub3PtCloudTrans(:,1:3));
      
-     FinalPointCloud=pcmerge(MasterPtCloudFinal,Sub1PtCloudFinal,Sub2PtCloudFinal,Sub3PtCloudFinal,0.01);
-p_temp=pcdenoise(FinalPointCloud,'NumNeighbors',300);
-
-     p=pcdownsample(p_temp,'gridAverage',0.01);
-     [t,tnorm]=MyRobustCrust(p.Location);
-     figure
-     pcshow(p.Location,'b','VerticalAxis','Y','VerticalAxisDir','down')
-
-figure
-        hold on
-        title('Output Triangulation','fontsize',14)
-        axis equal
-        trisurf(t,p.Location(:,1),p.Location(:,2),p.Location(:,3),'FaceColor','c','EdgeColor','c')
-        colormap('bone')
-     Surface_Lunge_Movie(k)=getframe(gcf);
-% %      figure 
-% %    hold on
-% %    pcshow(MasterPtCloudFinal,'b','VerticalAxis','Y','VerticalAxisDir','down')
-% %    pcshow(Sub1PtCloudFinal,'b','VerticalAxis','Y','VerticalAxisDir','down')
-% %    pcshow(Sub2PtCloudFinal,'b','VerticalAxis','Y','VerticalAxisDir','down')
-% %    pcshow(Sub3PtCloudFinal,'b','VerticalAxis','Y','VerticalAxisDir','down')
+     FinalPointCloudtemp1=pcmerge(MasterPtCloudFinal,Sub1PtCloudFinal,0.1);
+    FinalPointCloudtemp2=pcmerge(FinalPointCloudtemp1,Sub2PtCloudFinal,0.1);
+    FinalPointCloud=pcmerge(FinalPointCloudtemp2,Sub3PtCloudFinal,0.1);
+     
+% % %      p_temp=pcdenoise(FinalPointCloud,'NumNeighbors',300);
+% % % 
+% % %      p=pcdownsample(p_temp,'gridAverage',0.1);
+% % %      [t,tnorm]=MyRobustCrust(p.Location);
+% % %      figure
+% % %      pcshow(p.Location,'b','VerticalAxis','Y','VerticalAxisDir','down')
+% % % 
+% % % figure
+% % %         hold on
+% % %         title('Output Triangulation','fontsize',14)
+% % %         axis equal
+% % %         trisurf(t,p.Location(:,1),p.Location(:,2),p.Location(:,3),'FaceColor','c','EdgeColor','b')
+% % %         colormap('bone')
+% % %      Surface_Lunge_Movie(k)=getframe(gcf);
+     figure 
+   hold on
+   pcshow(MasterPtCloudFinal.Location,'b','VerticalAxis','Y','VerticalAxisDir','down')
+   pcshow(Sub1PtCloudFinal.Location,'r','VerticalAxis','Y','VerticalAxisDir','down')
+   pcshow(Sub2PtCloudFinal.Location,'g','VerticalAxis','Y','VerticalAxisDir','down')
+   pcshow(Sub3PtCloudFinal.Location,'y','VerticalAxis','Y','VerticalAxisDir','down')
 % %    xlim([-1000 1000])
 % %     ylim([-1000 1000])
 % %     zlim([2000 4000])
 % %     view(90,0)
-% % % % 
+
 figure 
    hold on
-   pcshow(FinalPointCloud,'b','VerticalAxis','Y','VerticalAxisDir','down')
-   xlim([-1000 1000])
-    ylim([-1000 1000])
-    zlim([2000 4000])
-    view(90,0)
+   pcshow(FinalPointCloud.Location,'b','VerticalAxis','Y','VerticalAxisDir','down')
+% % %    xlim([-1000 1000])
+% % %     ylim([-1000 1000])
+% % %     zlim([2000 4000])
+% % %     view(90,0)
 % %     set(gcf,'color','w');
 % %     set(gca,'color','w');
 
@@ -133,22 +136,22 @@ figure
 end
 end
 
-videoname = ('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DataJan_23\LungeMotion.avi');
-
-        v=VideoWriter(videoname);
-
-        v.Quality=100;
-
-        v.FrameRate=100;
-
-        open(v)
-
-        for i=1:length(Lunge_Movie)
-
-            writeVideo(v,Lunge_Movie(i))
-
-        end
-
-        close(v)
-
-    
+% % % videoname = ('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DataJan_23\LungeMotion.avi');
+% % % 
+% % %         v=VideoWriter(videoname);
+% % % 
+% % %         v.Quality=100;
+% % % 
+% % %         v.FrameRate=100;
+% % % 
+% % %         open(v)
+% % % 
+% % %         for i=1:length(Lunge_Movie)
+% % % 
+% % %             writeVideo(v,Lunge_Movie(i))
+% % % 
+% % %         end
+% % % 
+% % %         close(v)
+% % % 
+% % %     

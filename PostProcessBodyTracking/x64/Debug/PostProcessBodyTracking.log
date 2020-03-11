@@ -1,8 +1,9 @@
 ﻿  mainPostBody.cpp
-C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(239,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(268,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(316,3): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
-C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(318,54): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
-C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(950,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'size_t'
-C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(950,11): message : consider using '%zd' in the format string
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(253,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(285,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(313,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(361,3): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(363,54): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(997,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'size_t'
+C:\Users\Abby.Eustace\Desktop\Kinect Azure\Azure-Kinect-Samples-master\body-tracking-samples\offline_processor\mainPostBody.cpp(997,11): message : consider using '%zd' in the format string
   PostProcessBodyTracking.vcxproj -> C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\x64\Debug\PostProcessBodyTracking.exe
