@@ -1,6 +1,8 @@
 clc; clear all ;close all
-MasterPointFilePath=dir('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DUPelv\S03\Trials\plyFiles\Master\*.ply');
-Sub1PointFilePath=dir('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DUPelv\S03\Trials\plyFiles\Sub\*.ply');
+MasterPointFilePath=dir('D:\DUPelv\S04\plyFiles\Master*.ply');
+Sub1PointFilePath=dir('D:\DUPelv\S04\plyFiles\Sub*.ply');
+
+JsonFile=jsondecode(fileread('D:\DUPelv\S04\mvkFiles\Master_DUPELV04_01.json'));
 
 MasterFileLength=length(MasterPointFilePath);
 Sub1FileLength=length(Sub1PointFilePath);
@@ -13,30 +15,32 @@ LeastFiles=min([MasterFileLength,Sub1FileLength]);
 % % %     0 sin(angle) cos(angle)  0;
 % % %     0 0 0 1];
 
-TransSub1Master=[0.319791764021 0.126292467117 -0.939033269882 1303.155273437500;
--0.099132902920 0.990097105503 0.099400021136 -120.232543945313;
-0.942287564278 0.061301779002 0.329144656658 803.105102539063;
+TransSub1Master=[0.135774418712 0.116779394448 -0.983833253384 1401.071289062500;
+-0.132871106267 0.986204266548 0.098723888397 -90.831909179688;
+0.981789469719 0.117318831384 0.149417921901 968.514892578125;
 0.000000000000 0.000000000000 0.000000000000 1.000000000000];
-
-
 
 k=1;
 
-for countFile=1:25%1:LeastFiles
+for countFile=200:220%1:LeastFiles
     
-if exist([MasterPointFilePath(1).folder,'\',sprintf('Master_DUPELV03_02.%d.ply',countFile)])==2 && ...  
-exist([Sub1PointFilePath(1).folder,'\',sprintf('Sub_DUPELV03_02.%d.ply',countFile)])==2 
+    jointori(countFile,:)=quat2eul(JsonFile.frames(countFile).bodies.joint_orientations(1,:))*(180/pi);
     
-MasterPointFile=[MasterPointFilePath(1).folder,'\',sprintf('Master_DUPELV03_02.%d.ply',countFile)];  
-Sub1PointFile=[Sub1PointFilePath(1).folder,'\',sprintf('Sub_DUPELV03_02.%d.ply',countFile)];  
+   
+    
+if exist([MasterPointFilePath(1).folder,'\',sprintf('Master_DUPELV04_01.%d.ply',countFile)])==2 && ...  
+exist([Sub1PointFilePath(1).folder,'\',sprintf('Sub_DUPELV04_01.%d.ply',countFile)])==2 
+    
+MasterPointFile=[MasterPointFilePath(1).folder,'\',sprintf('Master_DUPELV04_01.%d.ply',countFile)];  
+Sub1PointFile=[Sub1PointFilePath(1).folder,'\',sprintf('Sub_DUPELV04_01.%d.ply',countFile)];  
 
 MasterPtCloud=pcread(MasterPointFile);
     Sub1PtCloud=pcread(Sub1PointFile);
-  figure    
-  pcshow(MasterPtCloud.Location)
-  figure
-  pcshow(Sub1PtCloud.Location)
-  
+% %   figure    
+% %   pcshow(MasterPtCloud.Location)
+% %   figure
+% %   pcshow(Sub1PtCloud.Location)
+% %   
     LengthMaster=length(MasterPtCloud.Location);
     LengthSub1=length(Sub1PtCloud.Location);
      
@@ -46,11 +50,8 @@ MasterPtCloud=pcread(MasterPointFile);
     Sub1PtCloudTemp=ones(LengthSub1,4);
     Sub1PtCloudTemp(:,1:3)=Sub1PtCloud.Location(:,:);
  
-     
-  
        MasterPtCloudTrans=MasterPtCloudTemp;
-  
-    
+     
    for s1=1:LengthSub1
        Sub1PtCloudTrans(s1,:)=TransSub1Master*Sub1PtCloudTemp(s1,:)';
    end
@@ -91,6 +92,9 @@ MasterPtCloud=pcread(MasterPointFile);
 figure 
    hold on
    pcshow(FinalPointCloud.Location,'VerticalAxis','Y','VerticalAxisDir','down')
+   plot3(JsonFile.frames(countFile).bodies.joint_positions(19:22,1),JsonFile.frames(countFile).bodies.joint_positions(19:22,2),JsonFile.frames(countFile).bodies.joint_positions(19:22,3),'rx','MarkerSize',10,'LineWidth',3);
+   plot3(JsonFile.frames(countFile).bodies.joint_positions(23:26,1),JsonFile.frames(countFile).bodies.joint_positions(23:26,2),JsonFile.frames(countFile).bodies.joint_positions(23:26,3),'gx','MarkerSize',10,'LineWidth',3);
+
    xlim([-500 500])
     ylim([-500 1000])
     zlim([750 1700])
@@ -108,22 +112,22 @@ figure
 end
 end
 
-videoname = ('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DUPelv\S03\Trials\plyFiles\SeatedSlouched.avi');
-
-        v=VideoWriter(videoname);
-
-        v.Quality=100;
-
-        v.FrameRate=10;
-
-        open(v)
-
-        for i=1:length(T02_Movie)
-
-            writeVideo(v,T02_Movie(i))
-
-        end
-
-        close(v)
-
-    
+% % videoname = ('C:\Users\Abby.Eustace\Desktop\Kinect Azure\DataCollection\DUPelv\S03\Trials\plyFiles\SeatedSlouched.avi');
+% % 
+% %         v=VideoWriter(videoname);
+% % 
+% %         v.Quality=100;
+% % 
+% %         v.FrameRate=10;
+% % 
+% %         open(v)
+% % 
+% %         for i=1:length(T02_Movie)
+% % 
+% %             writeVideo(v,T02_Movie(i))
+% % 
+% %         end
+% % 
+% %         close(v)
+% % 
+% %     

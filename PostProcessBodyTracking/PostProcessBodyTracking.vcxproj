@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Program Files\json-develop\include;C:\Program Files\Azure Kinect SDK v1.3.0\sdk\include;C:\Program Files\Azure Kinect Body Tracking SDK\sdk\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files\PropertyTree\property_tree-develop\include;C:\Program Files\json-develop\include;C:\Program Files\Azure Kinect SDK v1.3.0\sdk\include;C:\Program Files\Azure Kinect Body Tracking SDK\sdk\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files\Azure Kinect SDK v1.3.0\sdk\windows-desktop\amd64\release\lib;C:\Program Files\Azure Kinect Body Tracking SDK\sdk\windows-desktop\amd64\release\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -79,6 +79,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

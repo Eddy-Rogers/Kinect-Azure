@@ -8,12 +8,14 @@ File=input('What is the filename');
 collectingEXE='k4arecorder.exe';
 exe='OnlyJointProcessing.exe';
       jsonFile=[File '.json'];
-       mkvFile=[File '.mkv'];
+       MastermkvFile=[File 'Master.mkv'];
+       SubmkvFile=[File 'Sub.mkv'];
        %% Collect Kinect Data
-        system(['"',mkvPath,collectingEXE,'" -l 5 "',Path,mkvFile,'"']);
+        system(['"',mkvPath,collectingEXE,'" -l 6 --device 0 --external-sync Subordinate -d NFOV_UNBINNED "',Path,SubmkvFile,'"&']);
+        system(['"',mkvPath,collectingEXE,'" -l 6 --device 1 --external-sync Master -d NFOV_UNBINNED "',Path,MastermkvFile,'"']);
          
 %% Process the mkv to get the Key Points
-        system(['"',exePath,exe,'" "',Path,mkvFile,'" "',Path,jsonFile,'"']);
+        system(['"',exePath,exe,'" "',Path,MastermkvFile,'" "',Path,jsonFile,'"']);
 
         pause(2)
 %% Determine the knee angle from the key points        

@@ -404,7 +404,7 @@ int main(int argc, char** argv)
 				//There must be something we forgot in the commented code below if it worked previously.
 				if (files[i].capture != NULL)
 				{
-					std::cout << "Capture Exists\n";
+					//std::cout << "Capture Exists\n";
 					//Get the depth image
 					cameraRecording[i] = &files[i];
 					depthList[i] = k4a_capture_get_depth_image(cameraRecording[i]->capture);
@@ -421,7 +421,7 @@ int main(int argc, char** argv)
 			//If all of the cameras produced a depth image
 			if (!depthNotFound)
 			{
-				std::cout << "All Cameras Have Depth Image\n";
+				//std::cout << "All Cameras Have Depth Image\n";
 				//Create lists of the items we need to create a point cloud
 				k4a_image_t* xy_table = new k4a_image_t[file_count];
 				k4a_image_t* point_cloud = new k4a_image_t[file_count];
@@ -452,7 +452,7 @@ int main(int argc, char** argv)
 					//Generate the point cloud
 					int point_count = 0;
 
-					std::cout << "Generating Point Cloud\n";
+					//std::cout << "Generating Point Cloud\n";
 					generate_point_cloud(depthList[i], xy_table[i], point_cloud[i], &point_count);
 
 					//Save it to a file
@@ -466,7 +466,7 @@ int main(int argc, char** argv)
 
 					outputFileName << fileName->c_str() << '.' << count << ".ply";
 
-					std::cout << "Writing Point Cloud\n";
+					//std::cout << "Writing Point Cloud\n";
 					write_point_cloud(outputFileName.str().c_str(), point_cloud[i], point_count);
 
 					k4a_capture_release(cameraRecording[i]->capture);
@@ -493,7 +493,7 @@ int main(int argc, char** argv)
 				}
 			}
 			++count;
-			std::cout << "While loop iteration: " << count << "\n";
+			//std::cout << "While loop iteration: " << count << "\n";
 		}
 		/*
 		// Print the first frame number of captures in order of timestamp across all the recordings.

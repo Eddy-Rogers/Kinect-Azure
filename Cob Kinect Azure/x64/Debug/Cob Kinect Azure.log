@@ -1,4 +1,5 @@
-﻿  main.cpp
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : Access to the path 'c:\users\abby.eustace\desktop\kinect azure\cob kinect azure\x64\debug\cob kinect azure.exe' is denied.
+  main.cpp
 C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\main.cpp(356,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'size_t'
 C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\main.cpp(356,11): message : consider using '%zd' in the format string
-  Cob Kinect Azure.vcxproj -> C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\x64\Debug\Cob Kinect Azure.exe
+LINK : fatal error LNK1104: cannot open file 'C:\Users\Abby.Eustace\Desktop\Kinect Azure\Cob Kinect Azure\x64\Debug\Cob Kinect Azure.exe'

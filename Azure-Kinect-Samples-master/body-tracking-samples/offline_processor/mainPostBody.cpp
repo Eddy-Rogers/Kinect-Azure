@@ -20,9 +20,18 @@
 
 #include <k4a/BodyTrackingHelpers.h>
 #include <k4a/Utilities.h>
+#include <boost/property_tree/ptree.hpp>
+//This line causes every method in this file to throw an error for some reason.
+#include <boost/property_tree/json_parser.hpp>
+
 
 using namespace std;
-using namespace nlohmann;
+
+using boost::property_tree::ptree;
+
+bool test() {
+	ptree test_ptree;
+}
 
 typedef struct
 {
@@ -98,6 +107,8 @@ static void create_xy_table(const k4a_calibration_t* calibration, k4a_image_t xy
 //Creates a bounding box struct corresponding to the maximum and minimum detected joint positions
 bounding_box create_bounding_box(k4a_float3_t* jointPositions)
 {
+
+	//Look into: y axis is flipped
 	bounding_box bounds;
 	bounds.maximum = jointPositions[0];
 	bounds.minimum = jointPositions[0];
@@ -328,7 +339,7 @@ bool get_master_subordinate_input()
 
 //DU Modification -- Eddy Rogers
 //Added a list of xyz coordinates to be used in point cloud bounding algorithm, and an int to serve as a weight for how likely the data is to be accurate.
-bool predict_joints(json& frames_json, int frame_count, k4abt_tracker_t tracker, k4a_capture_t capture_handle, 
+bool predict_joints(ptree frames_json, int frame_count, k4abt_tracker_t tracker, k4a_capture_t capture_handle, 
 						k4a_float3_t* jointPositions)
 {
 	k4a_wait_result_t queue_capture_result = k4abt_tracker_enqueue_capture(tracker, capture_handle, K4A_WAIT_INFINITE);
@@ -349,47 +360,65 @@ bool predict_joints(json& frames_json, int frame_count, k4abt_tracker_t tracker,
 	size_t num_bodies = k4abt_frame_get_num_bodies(body_frame);
 	uint64_t timestamp = k4abt_frame_get_device_timestamp_usec(body_frame);
 
-	json frame_result_json;
-	frame_result_json["timestamp_usec"] = timestamp;
-	frame_result_json["frame_id"] = frame_count;
-	frame_result_json["num_bodies"] = num_bodies;
-	frame_result_json["bodies"] = json::array();
+	ptree frame_result_json;
+	frame_result_json.put("timestamp_usec", timestamp);
+	frame_result_json.put("frame_id", frame_count);
+	frame_result_json.put("num_bodies", num_bodies);
 	for (size_t i = 0; i < num_bodies; i++)
 	{
 		k4abt_skeleton_t skeleton;
 		VERIFY(k4abt_frame_get_body_skeleton(body_frame, i, &skeleton), "Get body from body frame failed!");
-		json body_result_json;
+		ptree body_result_json;
 		int body_id = k4abt_frame_get_body_id(body_frame, i);
-		body_result_json["body_id"] = body_id;
+		body_result_json.put("body_id", body_id);
 
 		int total_confidence = 0;
+
+		ptree joint_position__list, joint_orientation_list, joint_confidence_list;
 
 		for (int j = 0; j < (int)K4ABT_JOINT_COUNT; j++)
 		{
 
-			body_result_json["joint_positions"].push_back({ skeleton.joints[j].position.xyz.x,
-																skeleton.joints[j].position.xyz.y,
-																skeleton.joints[j].position.xyz.z });
+			ptree joint_positions_json, joint_orientations_json, joint_confidence_json;
+			ptree pos_x, pos_y, pos_z, orient_x, orient_y, orient_z, orient_w;
+			pos_x.put("", skeleton.joints[j].position.xyz.x);
+			pos_y.put("", skeleton.joints[j].position.xyz.y);
+			pos_z.put("", skeleton.joints[j].position.xyz.y);
+			joint_positions_json.push_back(std::make_pair("", pos_x));
+			joint_positions_json.push_back(std::make_pair("", pos_y));
+			joint_positions_json.push_back(std::make_pair("", pos_z));
+
+			orient_x.put("", skeleton.joints[j].orientation.wxyz.x);
+			orient_y.put("", skeleton.joints[j].orientation.wxyz.y);
+			orient_z.put("", skeleton.joints[j].orientation.wxyz.z);
+			orient_w.put("", skeleton.joints[j].orientation.wxyz.w);
+			joint_orientations_json.push_back(std::make_pair("", orient_w));
+			joint_orientations_json.push_back(std::make_pair("", orient_x));
+			joint_orientations_json.push_back(std::make_pair("", orient_y));
+			joint_orientations_json.push_back(std::make_pair("", orient_z));
 
 			//Insert the joint poistion into the array
 			jointPositions[j] = skeleton.joints[j].position;
 
-			body_result_json["joint_orientations"].push_back({ skeleton.joints[j].orientation.wxyz.w,
-																skeleton.joints[j].orientation.wxyz.x,
-																skeleton.joints[j].orientation.wxyz.y,
-																skeleton.joints[j].orientation.wxyz.z });
-
 			total_confidence += skeleton.joints[j].confidence_level;
 
 			//Pushes the confidence level of each joint back on the JSON group containing the quaternions and the positions
-			body_result_json["joint_confidence"].push_back({ skeleton.joints[j].confidence_level });
+			joint_confidence_json.put("", skeleton.joints[j].confidence_level);
+
+			joint_position__list.push_back(std::make_pair("", joint_positions_json));
+			joint_orientation_list.push_back(std::make_pair("", joint_orientations_json));
+			joint_confidence_json.push_back(std::make_pair("", joint_orientations_json));
 		}
 
-		body_result_json["total_confidence"] = total_confidence;
+		body_result_json.add_child("joint_positions", joint_position__list);
+		body_result_json.add_child("joint_orientations", joint_orientation_list);
+		body_result_json.add_child("joint_confidence", joint_confidence_list);
 
-		frame_result_json["bodies"].push_back(body_result_json);
+		body_result_json.put("total_confidence", total_confidence);
+
+		frame_result_json.add_child("bodies", body_result_json);
 	}
-	frames_json.push_back(frame_result_json);
+	frames_json.add_child("", frame_result_json);
 	k4abt_frame_release(body_frame);
 
 	return true;
@@ -453,29 +482,43 @@ bool process_mkv_offline_json(playback_info playback, bool bounding) {
 		}
 
 		//Create a JSON object to be output
-		json json_output;
-		json_output["k4abt_sdk_version"] = K4ABT_VERSION_STR;
-		json_output["source_file"] = playback.files[i].filename;
+		ptree json_output;
+		json_output.put("k4abt_sdk_version", K4ABT_VERSION_STR);
+		json_output.put("source_file", playback.files[i].filename);
 
+		
 		// Store all joint names to the json
-		json_output["joint_names"] = json::array();
+		ptree joint_names;
 		for (int i = 0; i < (int)K4ABT_JOINT_COUNT; i++)
 		{
-			json_output["joint_names"].push_back(g_jointNames.find((k4abt_joint_id_t)i)->second);
+			ptree joint_name;
+			joint_name.put("", g_jointNames.find((k4abt_joint_id_t)i)->second);
+			joint_names.push_back(std::make_pair("", joint_name));
 		}
+		json_output.add_child("joint_names", joint_names);
+
+		//----------------------------------------------------------------------------------------------------------
+		// Up to this point changed into Property Trees
 
 		// Store all bone linkings to the json
-		json_output["bone_list"] = json::array();
+		ptree boneList;
+		ptree boneListChildren;
 		for (int i = 0; i < (int)g_boneList.size(); i++)
 		{
-			json_output["bone_list"].push_back({ g_jointNames.find(g_boneList[i].first)->second,
-												 g_jointNames.find(g_boneList[i].second)->second });
+			ptree addChild;
+			addChild.put("", std::make_pair(g_jointNames.find(g_boneList[i].first)->second, g_jointNames.find(g_boneList[i].second)->second));
+			boneListChildren.push_back(std::make_pair("", addChild));
+			//json_output["bone_list"].push_back({ g_jointNames.find(g_boneList[i].first)->second,
+			//									 g_jointNames.find(g_boneList[i].second)->second });
 		}
+		boneList.add_child("bone_list", boneListChildren);
 
 		cout << "Tracking " << playback.files[i].filename << endl;
 
 		int frame_count = 0;
-		json frames_json = json::array();
+		//json frames_json = json::array();
+		ptree frames_json;
+		ptree frames_json_children;
 		
 		//For each frame
 		while (true)
@@ -522,7 +565,7 @@ bool process_mkv_offline_json(playback_info playback, bool bounding) {
 
 		if (success[i])
 		{
-			json_output["frames"] = frames_json;
+			json_output.add_child("frames", frames_json);
 			cout << endl << "DONE " << endl;
 
 			cout << "Total read " << frame_count << " frames" << endl;
@@ -544,7 +587,9 @@ bool process_mkv_offline_json(playback_info playback, bool bounding) {
 			}
 
 			//Write to the output file
-			output_file << std::setw(4) << json_output << std::endl;
+			
+			boost::property_tree::json_parser::write_json(output_file, json_output);
+			
 			cout << "Results saved in " << json_filename.c_str() << std::endl;
 		}
 
@@ -607,7 +652,9 @@ bool process_mkv_offline_point(playback_info playback, bool bounding)
 			return false;
 		}
 
+		ptree json_output;
 		//Create a JSON object to be output
+		/*
 		json json_output;
 		json_output["k4abt_sdk_version"] = K4ABT_VERSION_STR;
 		json_output["source_file"] = playback.files[i].filename;
@@ -626,11 +673,12 @@ bool process_mkv_offline_point(playback_info playback, bool bounding)
 			json_output["bone_list"].push_back({ g_jointNames.find(g_boneList[i].first)->second,
 												 g_jointNames.find(g_boneList[i].second)->second });
 		}
-
+		*/
 		cout << "Tracking " << playback.files[i].filename << endl;
 
 		int frame_count = 0;
-		json frames_json = json::array();
+		//json frames_json = json::array();
+		ptree frames_json;
 
 		//For each frame
 		while (true)
@@ -769,6 +817,7 @@ bool process_mkv_offline_both(playback_info playback, bool bounding)
 			return false;
 		}
 
+		/*
 		//Create a JSON file to be output
 		json json_output;
 		json_output["k4abt_sdk_version"] = K4ABT_VERSION_STR;
@@ -788,11 +837,45 @@ bool process_mkv_offline_both(playback_info playback, bool bounding)
 			json_output["bone_list"].push_back({ g_jointNames.find(g_boneList[i].first)->second,
 												 g_jointNames.find(g_boneList[i].second)->second });
 		}
+		*/
 
+		//Create a JSON object to be output
+		ptree json_output;
+		json_output.put("k4abt_sdk_version", K4ABT_VERSION_STR);
+		json_output.put("source_file", playback.files[i].filename);
+
+
+		// Store all joint names to the json
+		ptree joint_names;
+		for (int i = 0; i < (int)K4ABT_JOINT_COUNT; i++)
+		{
+			ptree joint_name;
+			joint_name.put("", g_jointNames.find((k4abt_joint_id_t)i)->second);
+			joint_names.push_back(std::make_pair("", joint_name));
+		}
+		json_output.add_child("joint_names", joint_names);
+
+		//----------------------------------------------------------------------------------------------------------
+		// Up to this point changed into Property Trees
+
+		// Store all bone linkings to the json
+		ptree boneList;
+		ptree boneListChildren;
+		for (int i = 0; i < (int)g_boneList.size(); i++)
+		{
+			ptree addChild;
+			addChild.put("", std::make_pair(g_jointNames.find(g_boneList[i].first)->second, g_jointNames.find(g_boneList[i].second)->second));
+			boneListChildren.push_back(std::make_pair("", addChild));
+			//json_output["bone_list"].push_back({ g_jointNames.find(g_boneList[i].first)->second,
+			//									 g_jointNames.find(g_boneList[i].second)->second });
+		}
+		boneList.add_child("bone_list", boneListChildren);
 		cout << "Tracking " << playback.files[i].filename << endl;
 
 		int frame_count = 0;
-		json frames_json = json::array();
+		//json frames_json = json::array();
+		ptree frames_json;
+		ptree frames_json_children;
 
 		//For each frame
 		while (true)
@@ -878,7 +961,8 @@ bool process_mkv_offline_both(playback_info playback, bool bounding)
 		if (success[i])
 		{
 			//Write the JSON object to a file
-			json_output["frames"] = frames_json;
+			json_output.add_child("frames", frames_json);
+			//json_output["frames"] = frames_json;
 			cout << endl << "DONE " << endl;
 
 			cout << "Total read " << frame_count << " frames" << endl;
@@ -900,7 +984,8 @@ bool process_mkv_offline_both(playback_info playback, bool bounding)
 			}
 
 			//Write to the output file
-			output_file << std::setw(4) << json_output << std::endl;
+			//output_file << std::setw(4) << json_output << std::endl;
+			boost::property_tree::json_parser::write_json(output_file, json_output);
 			cout << "Results saved in " << json_filename.c_str() << std::endl;
 		}
 	}
